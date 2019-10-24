@@ -2,7 +2,7 @@
 CREATE TABLE entries (
     id Serial PRIMARY KEY,
     day Date NOT NULL,
-    time Time NOT NULL,
+    time_ Time NOT NULL,
     machine TEXT NOT NULL,
     process TEXT NOT NULL,
     message TEXT NOT NULL

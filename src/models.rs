@@ -1,10 +1,11 @@
-use schema::entries;
+use crate::schema::entries;
+use chrono::{NaiveDate, NaiveTime};
 
 #[derive(Queryable)]
 pub struct Entry {
     pub id: i32,
-    pub date: String,
-    pub time: String, 
+    pub day: NaiveDate,
+    pub time_: NaiveTime, 
     pub machine: String,
     pub process: String,
     pub message: String
@@ -13,9 +14,10 @@ pub struct Entry {
 #[derive(Insertable)]
 #[table_name="entries"]
 pub struct NewEntry<'a> {
-    pub date: &'a str,
-    pub time: &'a str,
+    pub day: &'a NaiveDate,
+    pub time_: &'a NaiveTime, 
     pub machine: &'a str,
     pub process: &'a str,
     pub message: &'a str
 }
+

@@ -1,9 +1,12 @@
+#[macro_use]
 extern crate diesel;
 
 use diesel::prelude::*;
 use diesel::pg::PgConnection;
 use dotenv::dotenv;
 use std::env;
+use chrono::{NaiveTime, NaiveDate};
+use failure::{Error, format_err};
 
 pub mod schema;
 pub mod models;
@@ -19,12 +22,12 @@ pub fn establish_connection() -> PgConnection {
         .expect(&format!("Error connecting to {}", database_url))
 }
 
-pub fn create_entry<'a>(conn: &PgConnection, date: &'a str, time: &'a str, machine: &'a str, process: &'a str, message: &'a str) {
+pub fn create_entry<'a>(conn: &PgConnection, date: &'a NaiveDate, time: &'a NaiveTime, machine: &'a str, process: &'a str, message: &'a str) -> Entry {
     use schema::entries;
 
     let new_entry = NewEntry {
-        date: date,
-        time: time,
+        day: date,
+        time_: time,
         machine: machine,
         process: process,
         message: message

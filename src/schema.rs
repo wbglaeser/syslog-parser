@@ -2,7 +2,7 @@ table! {
     entries (id) {
         id -> Int4,
         day -> Date,
-        time -> Time,
+        time_ -> Time,
         machine -> Text,
         process -> Text,
         message -> Text,
