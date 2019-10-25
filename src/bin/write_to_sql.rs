@@ -13,7 +13,7 @@ use log::{debug, info, trace};
 use dotenv::dotenv;
 use std::env;
 
-lazy_static! {static ref RE: Regex = Regex::new(r"([A-Z][a-z]{2}\s\d{2})\s(\d{2}:\d{2}:\d{2})\s([A-z0-9]+)\s([A-z0-9  \[\]\(\).\-]+):\s([A-z0-9 \.:,;\-_?!#'+*´`'()\[\]]+\n)").unwrap();}
+lazy_static! {static ref RE: Regex = Regex::new(r"([A-Z][a-z]{2}\s\d{2})\s(\d{2}:\d{2}:\d{2})\s([A-z0-9]+)\s([A-z0-9  \[\]\(\).\-]+):\s([A-z0-9 \.:,;\-_=?!#'+*´`'()\[\]/]+\n)").unwrap();}
 
 fn main() {
     dotenv().ok();
@@ -41,12 +41,13 @@ fn main() {
 
     trace!("Starting loop over lines");
     for cap in matches {
+
         let dateyear = format!("2019 {}", &cap[1]); 
 
         let date = NaiveDate::parse_from_str(&dateyear, "%Y %b %d").expect("date did not work");
         let time = NaiveTime::parse_from_str(&cap[2], "%H:%M:%S").expect("time did not wort");
 
-        let entry = create_entry(&connection, &date, &time, &cap[3], &cap[4], &cap[5]);
+        create_entry(&connection, &date, &time, &cap[3], &cap[4], &cap[5]);
     }
         
     debug!("All entries read to database");

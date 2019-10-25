@@ -5,6 +5,7 @@ CREATE TABLE entries (
     time_ Time NOT NULL,
     machine TEXT NOT NULL,
     process TEXT NOT NULL,
-    message TEXT NOT NULL
+    message TEXT NOT NULL,
+    UNIQUE (day, time_, machine, process, message)
 )
 
