@@ -18,6 +18,7 @@ lazy_static! {static ref RE: Regex = Regex::new(r"([A-Z][a-z]{2}\s\d{2})\s(\d{2}
 fn main() {
 
     dotenv().ok();
+
     pretty_env_logger::init();
     info!("Collect Syslog - v0.0.1");
 
