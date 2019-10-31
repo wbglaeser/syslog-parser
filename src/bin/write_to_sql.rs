@@ -16,6 +16,7 @@ use std::env;
 lazy_static! {static ref RE: Regex = Regex::new(r"([A-Z][a-z]{2}\s\d{2})\s(\d{2}:\d{2}:\d{2})\s([A-z0-9]+)\s([A-z0-9  \[\]\(\).\-]+):\s([A-z0-9 \.:,;\-_=?!#'+*´`'()\[\]/]+\n)").unwrap();}
 
 fn main() {
+
     dotenv().ok();
     pretty_env_logger::init();
     info!("Collect Syslog - v0.0.1");
